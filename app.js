@@ -4,6 +4,7 @@ const { Pool } = require("pg");
 const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 require('dotenv').config();
 // PostgreSQL RDS connection configuration
 const pool = new Pool({
