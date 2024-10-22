@@ -4,6 +4,7 @@ const { Pool } = require("pg");
 const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
+const path = require('path');
 app.use(cors());
 require('dotenv').config();
 // PostgreSQL RDS connection configuration
@@ -16,6 +17,18 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,  // Optional: for self-signed certificates
   },                   
+});
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route to serve HTML file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+// Route to serve HTML file
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Create contact API
