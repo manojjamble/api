@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Messages from Contact Form</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody id="messagesTableBody">
+            <!-- Messages will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch messages from the API
+        async function fetchMessages() {
+            try {
+                const response = await fetch('http://13.60.253.214:2000/get-all-data');
+                const messages = await response.json();
+                const tableBody = document.getElementById('messagesTableBody');
+                tableBody.innerHTML = ''; // Clear previous entries
+
+                // Populate the table with messages
+                messages.forEach(message => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${message.name}</td>
+                        <td>${message.email}</td>
+                        <td>${message.message}</td>
+                        <td>${message.created_at}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        }
+
+        // Call the fetchMessages function when the page loads
+        window.onload = fetchMessages;
+    </script>
+</body>
+</html>
