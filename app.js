@@ -37,7 +37,7 @@ app.post("/contact", async (req, res) => {
   console.log("Request body:", req.body);
   try {
     console.log("Inserting contact info into database...");
-    const queryText = "INSERT INTO contacts(name, email, message) VALUES($1, $2, $3) RETURNING *";
+    const queryText = "INSERT INTO contact_form(name, email, message) VALUES($1, $2, $3) RETURNING *";
     const values = [name, email, message];
     console.log("Query text:", queryText);
     const result = await pool.query(queryText, values);
@@ -51,7 +51,7 @@ app.post("/contact", async (req, res) => {
 // New GET route to fetch all data
 app.get('/get-all-data', async (req, res) => {
     try {
-      const allData = await pool.query('SELECT * FROM contacts');
+      const allData = await pool.query('SELECT * FROM contact_form');
       res.json(allData.rows); // Returns all rows from the contact_form table
     } catch (err) {
       console.error(err.message);
