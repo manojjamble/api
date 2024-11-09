@@ -10,8 +10,8 @@ require('dotenv').config();
 // PostgreSQL RDS connection configuration
 const pool = new Pool({
   user: "postgres",        // PostgreSQL username
-  host: "portfoliodbs.cdak0g2wqa11.eu-north-1.rds.amazonaws.com",     // RDS PostgreSQL endpoint
-  database: "portfoliodbs",       // Your database name
+  host: "mydb.cz0q6mq0u61d.us-east-1.rds.amazonaws.com",     // RDS PostgreSQL endpoint
+  database: "mydb",       // Your database name
   password: "manoj123",     // Your database password
   port: 5432,
   ssl: {
