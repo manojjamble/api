@@ -47,7 +47,7 @@
         // Fetch messages from the API
         async function fetchMessages() {
             try {
-                const response = await fetch('http://51.20.131.188:2000/get-all-data');
+                const response = await fetch('http://54.166.152.74:2000/get-all-data');
                 const messages = await response.json();
                 const tableBody = document.getElementById('messagesTableBody');
                 tableBody.innerHTML = ''; // Clear previous entries
